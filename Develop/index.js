@@ -25,40 +25,92 @@ const questions = [
     {
     type: 'input',
     name: 'usage',
-    message: 'Enter usage instructions'
+    message: 'Enter usage instructions:'
     },
 
     {
     type: 'input',
     name: 'contribution',
-    message: 'Enter contribution guidelines'
+    message: 'Enter contribution guidelines:'
     },
 
     {
     type: 'input',
     name: 'test',
-    message: 'Enter test instructions'
+    message: 'Enter test instructions:'
     },
 
     {
-    type: 'input',
+    type: 'list',
     name: 'license',
-    message: 'Choose a license',
+    message: 'Choose a license:',
     choices: ['MIT', 'other', 'other', 'other' ]
     },
 
     {
     type:'input',
-    name: 'Github username',
-    message: 'Enter your Github username'
+    name: 'github',
+    message: 'Enter your Github username:'
     },
 
     {
     type: 'input',
     name: 'email',
-    message: 'Enter your email address '
+    message: 'Enter your email address:'
     },
 
 ]
 
-init();
+// TODO: Create a function to write README file
+function writeToFile(fileName, data) {
+    fs.writeFileSync(fileName, data)
+}
+
+// TODO: Create a function to initialize app
+function init() {
+    inquirer.prompt(questions).then((answers) => {
+        const readmeContent = `
+        # ${answers.title}
+        
+        ## Description
+        ${answers.description}
+        
+        ## Table of Contents
+        - [Installation](#installation)
+        - [Usage](#usage)
+        - [Contributing](#contributing)
+        - [Tests](#tests)
+        - [License](#license)
+        - [Questions](#questions)
+        
+        ## Installation
+        ${answers.installation}
+        
+        ## Usage
+        ${answers.usage}
+
+        ## Contributing
+        ${answers.contributing}
+        
+        ## Tests
+        ${answers.tests}
+        
+        ## License
+        [![License: ${answers.license}](https://img.shields.io/badge/License-${answers.license}-blue.svg)](https://opensource.org/licenses/${answers.license})
+        
+        This application is covered under the ${answers.license} license.
+        
+        ## Questions
+        GitHub: [${answers.github}](https://github.com/${answers.github})
+        Email: ${answers.email}
+            `;
+        
+            // Write the README content to a file
+            writeToFile('README.md', readmeContent);
+            console.log('README.md generated successfully.');
+          });
+        }
+        
+        // Function call to initialize app
+        init();
+        
