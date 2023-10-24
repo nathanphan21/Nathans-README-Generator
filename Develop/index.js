@@ -44,7 +44,19 @@ const questions = [
     type: 'list',
     name: 'license',
     message: 'Choose a license:',
-    choices: ['MIT', 'other', 'other', 'other' ]
+    choices: [
+        'MIT',
+        'Apache 2.0',
+        'GPL 3.0',
+        'BSD 3-Clause',
+        'Mozilla Public License 2.0',
+        'GNU Affero General Public License v3.0',
+        'GNU General Public License v2.0',
+        'GNU General Public License v3.0',
+        'Eclipse Public License 2.0',
+        'The Unlicense',
+        'Other'
+      ]
     },
 
     {
